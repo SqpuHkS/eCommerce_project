@@ -1,11 +1,19 @@
-<form method="post">
-    {% csrf_token %}
+{% extends 'main_template.html' %}
 
-    {{ form }}
+{% block title %}
+    Login
+{% endblock %}
 
-    <button type="submit"
-            class="btn-default">
-        Submit
-    </button>
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
 
-</form>
+        {{ form }}
+
+        <button type="submit"
+                class="btn-default">
+            Submit
+        </button>
+
+    </form>
+{% endblock %}

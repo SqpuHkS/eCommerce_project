@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>HALO</h1>
-</body>
-</html>
+{% extends 'main_template.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    {% if username %}
+        <h3>HaLo {{ username }}</h3>
+    {% else %}
+        <h3>HaLO! You can login here:</h3>
+        <a href="{% url 'login-page-url' %}">Login</a>
+        <h3>Or register here:</h3>
+        <a href="{% url 'register-page-url' %}">Register</a>
+    {% endif %}
+{% endblock %}

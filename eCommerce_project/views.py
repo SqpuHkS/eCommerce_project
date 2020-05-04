@@ -1,10 +1,12 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, get_user_model
 from django.shortcuts import render, redirect
 from .forms import *
 
 
 
 def main_page(request):
+    if request.user.is_authenticated:
+        return render(request, 'main.html', context={'username': request.user.username})
     return render(request, 'main.html')
 
 def login_page(request):
@@ -13,12 +15,19 @@ def login_page(request):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         user = authenticate(request, username=username, password=password)
-        print(request.user.is_authenticated)
         if user is not None:
             login(request, user)
-            print(request.user.is_authenticated)
             return redirect('/')
     return render(request, 'login.html', {'form': form})
 
+
 def register_page(request):
-    return render(request, 'register.html')
+    User = get_user_model()
+    form = RegisterForm(request.POST or None)
+    if form.is_valid():
+        print(form.cleaned_data)
+        username = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        User.objects.create_user(username=username, email=email, password=password)
+    return render(request, 'register.html', context={'form':form})
