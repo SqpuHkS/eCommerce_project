@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate, get_user_model
 from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from .forms import *
+from .models import *
 
 
 
@@ -33,5 +34,13 @@ def register_page(request):
         User.objects.create_user(username=username, email=email, password=password)
     return render(request, 'register.html', context={'form':form})
 
-class ProductDetailSlugView(DetailView):
-    pass
+class ItemDetailSlugView(DetailView):
+    queryset = Item.objects.all()
+    template_name = 'detail.html'
+
+    def get_object(self, *args, **kwargs):
+        request = self.request
+        slug = self.kwargs.get('slug')
+        instance = Item.objects.filter(slug__icontains=slug)
+        return instance.first()
+

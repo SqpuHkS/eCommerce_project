@@ -1,0 +1,12 @@
+{% extends 'main_template.html' %}
+
+{% block title %}
+    Item Detail
+{% endblock %}
+
+{% block content %}
+    {{ object.title }}
+    {% if object.image %}
+        <img src="{{ object.image.url }}">
+    {% endif %}
+{% endblock %}
