@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate, get_user_model
 from django.shortcuts import render, redirect
+from django.views.generic.detail import DetailView
 from .forms import *
 
 
@@ -31,3 +32,6 @@ def register_page(request):
         password = form.cleaned_data.get('password')
         User.objects.create_user(username=username, email=email, password=password)
     return render(request, 'register.html', context={'form':form})
+
+class ProductDetailSlugView(DetailView):
+    pass
