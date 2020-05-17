@@ -1,4 +1,5 @@
 from django.contrib.auth import login, authenticate, get_user_model
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from .forms import *
@@ -34,6 +35,7 @@ def register_page(request):
         User.objects.create_user(username=username, email=email, password=password)
     return render(request, 'register.html', context={'form':form})
 
+
 class ItemDetailSlugView(DetailView):
     queryset = Item.objects.all()
     template_name = 'detail.html'
@@ -41,6 +43,11 @@ class ItemDetailSlugView(DetailView):
     def get_object(self, *args, **kwargs):
         request = self.request
         slug = self.kwargs.get('slug')
-        instance = Item.objects.filter(slug__icontains=slug)
-        return instance.first()
+        try:
+            instance = Item.objects.filter(slug=slug)
+        except Item.DoesNotExist:
+            raise Http404("Not found...")
+        except Item.MultipleObjectsReturned:
+            instance = Item.objects.filter(slug=slug).first()
+        return instance
 
