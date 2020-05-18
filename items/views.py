@@ -37,11 +37,10 @@ def register_page(request):
 
 
 class ItemDetailSlugView(DetailView):
-    queryset = Item.objects.all()
+    model = Item
     template_name = 'detail.html'
 
-    def get_object(self, *args, **kwargs):
-        request = self.request
+    def get_queryset(self, **kwargs):
         slug = self.kwargs.get('slug')
         try:
             instance = Item.objects.filter(slug=slug)
@@ -49,5 +48,6 @@ class ItemDetailSlugView(DetailView):
             raise Http404("Not found...")
         except Item.MultipleObjectsReturned:
             instance = Item.objects.filter(slug=slug).first()
+            print(instance)
         return instance
 
