@@ -48,6 +48,5 @@ class ItemDetailSlugView(DetailView):
             raise Http404("Not found...")
         except Item.MultipleObjectsReturned:
             instance = Item.objects.filter(slug=slug).first()
-            print(instance)
         return instance
 
