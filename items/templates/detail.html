@@ -1,4 +1,4 @@
-{% extends 'main_template.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}
@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ object.image.url }} <br/>
+    <h1 style="text-transform: capitalize">{{ object.title }} <h1/>
     <img src="{{ object.image.url }}" width="200px" height="200px"> <br/>
     {{ object.description }} <br/>
     {{ object.price }} <br/>

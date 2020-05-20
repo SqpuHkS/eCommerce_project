@@ -9,8 +9,8 @@ from .models import *
 
 def main_page(request):
     if request.user.is_authenticated:
-        return render(request, 'main.html', context={'username': request.user.username})
-    return render(request, 'main.html')
+        return render(request, 'home_page.html', context={'username': request.user.username})
+    return render(request, 'home_page.html')
 
 def login_page(request):
     form = LoginForm(request.POST or None)
