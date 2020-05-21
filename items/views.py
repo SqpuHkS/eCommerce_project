@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate, get_user_model
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from .forms import *
 from .models import *
 
@@ -34,6 +35,11 @@ def register_page(request):
         password = form.cleaned_data.get('password')
         User.objects.create_user(username=username, email=email, password=password)
     return render(request, 'register.html', context={'form':form})
+
+
+class ItemListView(ListView):
+    model = Item
+    template_name = 'list.html'
 
 
 class ItemDetailSlugView(DetailView):

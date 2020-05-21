@@ -25,6 +25,9 @@ class Item(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=20, default=0)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
 
+    def get_absolute_url(self):
+        return f'/items/{self.slug}'
+
 def item_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
