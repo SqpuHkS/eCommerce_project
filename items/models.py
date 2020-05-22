@@ -3,6 +3,7 @@ import random
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from .utils import unique_slug_generator
+from django.urls import reverse
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -26,7 +27,7 @@ class Item(models.Model):
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
 
     def get_absolute_url(self):
-        return f'/items/{self.slug}'
+        return reverse('items:detail', kwargs={'slug':self.slug})
 
 def item_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
