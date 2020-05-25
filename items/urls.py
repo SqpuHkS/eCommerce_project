@@ -5,3 +5,5 @@ urlpatterns = [
     url('list/', ItemListView.as_view(), name='list'),
     url('(?P<slug>[\w-]+)/$', ItemDetailSlugView.as_view(), name='detail'),
 ]
+
+app_name = 'items'
