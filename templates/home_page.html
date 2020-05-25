@@ -10,15 +10,16 @@
 {% endblock %}
 
 {% block content %}
-
-    <img src="{% static "img/img.webp" %}"/>
-
+    {% if 'img/home_page_img.jpg'  %}
+        <img src="{% static "img/home_page_img.jpg" %}"
+        class="full-screen-img"/>
+    {% endif %}
     {% if username %}
-        <h3>HaLo {{ username }}</h3>
+        <h1 class="center home_page_title">HaLo {{ username }}</h1>
     {% else %}
-        <h3>HaLO! You can login here:</h3>
+        <h1 class="center">HaLO! You can login here:</h1>
         <a href="{% url 'login-page-url' %}">Login</a>
-        <h3>Or register here:</h3>
+        <h1 class="center">Or register here:</h1>
         <a href="{% url 'register-page-url' %}">Register</a>
     {% endif %}
 {% endblock %}
