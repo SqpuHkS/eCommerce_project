@@ -98,7 +98,6 @@ h1{
   -o-transition:all .3s linear;
   -moz-transition:all .3s linear;
   -webkit-transition:all .3s linear;
-  color:#fff;
 }
 .credit{
   text-align:center;
@@ -132,4 +131,8 @@ border-bottom:3px solid #ddd;
 color:#333;
 font-family:'open sans',sans-serif;
 margin:10px;
+}
+
+.act{
+  background-color:#ee6666;
 }

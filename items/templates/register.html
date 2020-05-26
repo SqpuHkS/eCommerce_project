@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Register
 {% endblock %}
 
+{% block base_head %}
+    <link rel="stylesheet" href="{% static 'css/register_and_login.css' %}">
+{% endblock %}
+
 {% block content %}
+    <div class="register-and-login-block">
      <form method="post">
          {% csrf_token %}
 
@@ -12,9 +18,11 @@
          {{ form }} <br/>
 
          <button type="submit"
-                class="btn-default">
+                class="register-and-login-block">
             Submit
          </button>
 
     </form>
+    </div>
+
 {% endblock %}
