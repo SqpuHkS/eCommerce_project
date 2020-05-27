@@ -25,6 +25,7 @@ urlpatterns = [
     url('register/', register_page, name='register-page-url'),
     url('admin/', admin.site.urls),
     url('items/', include('items.urls', namespace='items')),
+    url('search/', include('search.urls', namespace='search')),
     url('^$', main_page, name='main-page-url'),
 ]
 
