@@ -17,9 +17,13 @@
     {% if username %}
         <h1 class="center home_page_title">HaLo {{ username }}</h1>
     {% else %}
-        <h1 class="center">HaLO! You can login here:</h1>
-        <a href="{% url 'login-page-url' %}">Login</a>
-        <h1 class="center">Or register here:</h1>
-        <a href="{% url 'register-page-url' %}">Register</a>
+        <h1 class="center">HaLO! You can login here:
+        <a href="{% url 'login-page-url' %}"
+            class="href-login-register">Login</a>
+        </h1>
+        <h1 class="center">Or register here:
+        <a href="{% url 'register-page-url' %}"
+            class="href-login-register">Register</a>
+        </h1>
     {% endif %}
 {% endblock %}

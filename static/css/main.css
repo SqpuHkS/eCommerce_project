@@ -14,3 +14,8 @@ body{
 .home_page_title{
     color: aqua;
 }
+
+.href-login-register{
+    color: #ee6666;
+    font-size: 20px;
+}

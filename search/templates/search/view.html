@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Items list
+{% endblock %}
+
+{% block base_head %}
+    <link rel="stylesheet" href="{% static 'css/search/view.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <input class="search" type="text" placeholder="Search">
+
+    <hr>
+    Results for <b>{{ request.GET.q.capitalize }}</b>
+    <br>
+    <hr>
+
+    {% for obj in object_list %}
+        <a href="{{ obj.get_absolute_url }}">{{ obj.title.capitalize }}</a> <br>
+    {% endfor %}
+{% endblock %}

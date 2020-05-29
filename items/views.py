@@ -22,7 +22,7 @@ def login_page(request):
         if user is not None:
             login(request, user)
             return redirect('/')
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'items/login.html', {'form': form})
 
 
 def register_page(request):
@@ -34,17 +34,17 @@ def register_page(request):
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         User.objects.create_user(username=username, email=email, password=password)
-    return render(request, 'register.html', context={'form':form})
+    return render(request, 'items/register.html', context={'form':form})
 
 
 class ItemListView(ListView):
     model = Item
-    template_name = 'list.html'
+    template_name = 'items/list.html'
 
 
 class ItemDetailSlugView(DetailView):
     model = Item
-    template_name = 'detail.html'
+    template_name = 'items/detail.html'
 
     def get_queryset(self, **kwargs):
         slug = self.kwargs.get('slug')
