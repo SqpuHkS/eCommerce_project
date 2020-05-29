@@ -7,6 +7,14 @@ from items.models import Item
 class SearchProductView(ListView):
     template_name = 'search/view.html'
 
+    def get_context_data(self, *args, **kwargs):
+        # the lane bellow give to the context variable all the data that context
+        # had before we override it
+        context = super(SearchProductView, self).get_context_data(*args, **kwargs)
+        query = self.request.GET.get('q')
+        context['query'] = query
+        return context
+
     def get_queryset(self, *args, **kwargs):
         request = self.request
         q = request.GET.get('q')

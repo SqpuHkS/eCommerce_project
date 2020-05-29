@@ -13,10 +13,12 @@
 {% block content %}
 
     <input class="search" type="text" placeholder="Search">
-
-    <hr>
-    Results for <b>{{ request.GET.q.capitalize }}</b>
-    <br>
+    {% if query %}
+        <hr>
+        Results for <b>{{ query }}</b>
+        <br>
+    {% endif %}
+    
     <hr>
 
     {% for obj in object_list %}
