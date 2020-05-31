@@ -4,7 +4,7 @@
 {% url 'register-page-url' as register %}
 
 <div class='nav'>
-  <ul>
+    <ul>
     <li><a class="{% if request.path ==  main_url %}act{% endif %}"
             href='{{ main_url }}'>Home</a></li>
     <li><a class="{% if request.path == list %}act{% endif %}"
@@ -30,5 +30,10 @@
     <li><a href='#'>About Us</a></li>
     <li><a href='#'>Contact Us</a></li>
     <li class='lamp'><span></span></li>
+
+    <div class="search">
+        {% include 'search/snippets/search-form.html' %}
+    </div>
   </ul>
+
 </div>

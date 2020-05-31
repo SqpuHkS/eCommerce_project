@@ -12,7 +12,7 @@
 
 {% block content %}
 
-    <input class="search" type="text" placeholder="Search">
+{% include 'search/snippets/search-form.html' %}
     {% if query %}
         <hr>
         Results for <b>{{ query }}</b>
