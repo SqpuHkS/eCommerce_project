@@ -136,3 +136,12 @@ margin:10px;
 .act{
   background-color:#ee6666;
 }
+
+.search{
+    padding-right: 30%;
+    margin-top: 21px;
+}
+
+.align-right{
+  float: right;
+}
