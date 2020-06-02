@@ -10,10 +10,13 @@
 {% endblock %}
 
 {% block content %}
-    {% if 'img/home_page_img.jpg'  %}
-        <img src="{% static "img/home_page_img.jpg" %}"
-        class="full-screen-img"/>
-    {% endif %}
+    <div class="search-center">
+        <div class="main-img">
+            <div class="search-container">
+                {% include 'search/snippets/search-form.html' %}
+            </div>
+        </div>
+    </div>
     {% if username %}
         <h1 class="center home_page_title">HaLo {{ username }}</h1>
     {% else %}

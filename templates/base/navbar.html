@@ -1,40 +1,38 @@
 {% url 'main-page-url' as main_url %}
-{% url 'items:list' as list%}
+{% url 'items:list' as list %}
 {% url 'login-page-url' as login %}
 {% url 'register-page-url' as register %}
 
 <div class='nav'>
     <ul>
-    <li><a class="{% if request.path ==  main_url %}act{% endif %}"
-            href='{{ main_url }}'>Home</a></li>
-    <li><a class="{% if request.path == list %}act{% endif %}"
-            href='{{ list }}'>Items</a>
-    {% if request.user.is_authenticated %}
-    <li><a class="{% if request.path ==  login %}act{% endif %}"
-            href='{{ login }}'>Login</a></li>
-    {% else %}
-        <li><a class="{% if request.path ==  login %}act{% endif %}"
-            href='{{ login }}'>Login</a></li>
-    <li><a class="{% if request.path == register %}act{% endif %}"
-            href='{{ register }}'>Register</a>
-    </li>
-    {% endif %}
-      <li><a href='#'>Subscription</a>
-        <ul>
-      <li><a href='#'>Free</a></li>
-      <li><a href='#'>Bronze</a></li>
-      <li><a href='#'>Sliver</a></li>
-      <li><a href='#'>Gold</a></li>
-      </ul>
-    </li>
-    <li><a href='#'>About Us</a></li>
-    <li><a href='#'>Contact Us</a></li>
-    <li class='lamp'><span></span></li>
-    <li class="search">
-        <div class="align-right">
-        {% include 'search/snippets/search-form.html' %}
-        </div>
-    </li>
-  </ul>
+        <li><a class="{% if request.path ==  main_url %}act{% endif %}"
+               href='{{ main_url }}'>Home</a></li>
+        <li><a class="{% if request.path == list %}act{% endif %}"
+               href='{{ list }}'>Items</a>
+            {% if request.user.is_authenticated %}
+                <li><a class="{% if request.path ==  login %}act{% endif %}"
+                       href='{{ login }}'>Login</a></li>
+            {% else %}
+                <li><a class="{% if request.path ==  login %}act{% endif %}"
+                       href='{{ login }}'>Login</a></li>
+                <li><a class="{% if request.path == register %}act{% endif %}"
+                       href='{{ register }}'>Register</a>
+                </li>
+            {% endif %}
+        <li><a href='#'>Subscription</a>
+            <ul>
+                <li><a href='#'>Free</a></li>
+                <li><a href='#'>Bronze</a></li>
+                <li><a href='#'>Sliver</a></li>
+                <li><a href='#'>Gold</a></li>
+            </ul>
+        </li>
+
+        <li class='lamp'><span></span></li>
+
+            <li class="not-lamp"><a>
+                <div class="mg-top">{% include 'search/snippets/search-form.html' %}</div></a></li>
+
+    </ul>
 
 </div>
