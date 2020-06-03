@@ -1,5 +1,9 @@
 body{
-    background-color: #003366;
+    background-color: #dedde5;
+}
+
+html{
+    overflow-x: hidden;
 }
 
 .full-screen-img{

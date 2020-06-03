@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.db.models import Q
 from django.views.generic.list import ListView
 from items.models import Item
 
@@ -21,5 +21,6 @@ class SearchProductView(ListView):
         # q is a search symbol since the url start to read your searching sentence
         # like http://localhost:8000/search/?q=hat
         if q is not None:
-            return Item.objects.filter(title__icontains=q)
-        return Item.objects.none()
+            lookups = Q(title__icontains=q) | Q(description__icontains=q)
+            return Item.objects.filter(lookups).distinct()
+        return Item.objects.featured()

@@ -39,16 +39,17 @@ input{
 .fa{
     box-sizing: border-box;
     padding: 10px;
-    width: 42.5px;
-    height: 42.5px;
+    width: 43.5px;
+    height: 43.5px;
     position: absolute;
     top: 0;
     right: 0;
     border-radius: 50%;
     color: #07051a;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.5em;
     transition: all 1s;
+    cursor: pointer;
 }
 
 form:hover{
@@ -63,4 +64,12 @@ form:hover input{
 form:hover .fa{
     background: #07051a;
     color: white;
+}
+
+.mobile-button{
+    border: medium none;
+  background-image: none;
+  background: transparent;
+  float: left;
+  background-color: transparent;
 }
