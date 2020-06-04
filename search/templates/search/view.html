@@ -12,7 +12,10 @@
 
 {% block content %}
 
-{% include 'search/snippets/search-form.html' %}
+    <div class="search-container">
+        {% include 'search/snippets/search-form.html' %}
+    </div>
+
     {% if query %}
         <hr>
         Results for <b>{{ query }}</b>

@@ -5,3 +5,12 @@
     padding-left: 30px;
     padding-right: 30px;
 }
+
+.search-container{
+    margin-top: 45px;
+}
+
+.search-container>form:hover{
+    width: 400px;
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+}

@@ -5,9 +5,13 @@
     Item Detail
 {% endblock %}
 
+{% block base_head %}
+    <link rel="stylesheet" href="{% static 'css/items/detail.css' %}">
+{% endblock %}
+
 {% block content %}
     <h1 style="text-transform: capitalize">{{ object.title }} <h1/>
-    <img src="{{ object.image.url }}" width="200px" height="200px"> <br/>
+    <img src="{{ object.image.url }}" class="item-img"> <br/>
     {{ object.description }} <br/>
     {{ object.price }} <br/>
 {% endblock %}
