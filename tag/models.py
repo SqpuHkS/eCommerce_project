@@ -6,7 +6,7 @@ from items.models import Item
 # Create your models here.
 class Tag(models.Model):
     title = models.CharField(max_length=120)
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True, unique=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
     items = models.ManyToManyField(Item, blank=True)

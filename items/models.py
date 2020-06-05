@@ -39,6 +39,9 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse('items:detail', kwargs={'slug':self.slug})
 
+    def __str__(self):
+        return self.title + '/'+ self.slug
+
     objects = models.Manager()
     active_objects = ItemManager()
 
