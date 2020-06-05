@@ -20,6 +20,15 @@ def upload_image_path(instance, filename):
     return f'items/{new_filename}/{final_filename}'
 
 
+
+class ItemManager(models.Manager):
+    def search(self, query):
+        lookups = ( Q(title__icontains=query) |
+                    Q(description__icontains=query) |
+                    Q(price__icontains=query)
+                    )
+        return Item.objects.filter(lookups).distinct()
+
 class Item(models.Model):
     title = models.CharField(max_length=30)
     slug = models.SlugField(blank=True, unique=True)
@@ -30,13 +39,12 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse('items:detail', kwargs={'slug':self.slug})
 
-    def search(self, query):
-        lookups = Q(title__icontains=query) | Q(description__icontains=query)
-        return Item.objects.filter(lookups).distinct()
+    objects = models.Manager()
+    active_objects = ItemManager()
+
 
 def item_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
 
 pre_save.connect(item_pre_save_receiver, sender=Item)
-

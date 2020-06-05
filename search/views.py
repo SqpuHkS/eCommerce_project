@@ -21,5 +21,5 @@ class SearchItemView(ListView):
         # q is a search symbol since the url start to read your searching sentence
         # like http://localhost:8000/search/?q=hat
         if q is not None:
-            return Item.search(self, q)
+            return Item.active_objects.search(q)
         return Item.objects.featured()
