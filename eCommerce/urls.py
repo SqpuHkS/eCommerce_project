@@ -19,10 +19,12 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from items.views import *
+from carts.views import cart_home
 
 urlpatterns = [
     url('admin/', admin.site.urls),
     url('login/', login_page, name='login-page-url'),
+    url('carts/', cart_home, name='carts-url'),
     url('register/', register_page, name='register-page-url'),
     url('items/', include('items.urls', namespace='items')),
     url('search/', include('search.urls', namespace='search')),
