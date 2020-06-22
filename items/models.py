@@ -25,7 +25,8 @@ class ItemManager(models.Manager):
     def search(self, query):
         lookups = ( Q(title__icontains=query) |
                     Q(description__icontains=query) |
-                    Q(price__icontains=query)
+                    Q(price__icontains=query) |
+                    Q(tag__title__icontains=query)
                     )
         return Item.objects.filter(lookups).distinct()
 
