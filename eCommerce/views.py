@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate, get_user_model
 from django.shortcuts import render, redirect
+from .forms import *
 
 def main_page(request):
     if request.user.is_authenticated:

@@ -19,7 +19,8 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from items.views import *
-from carts.views import cart_home
+from carts.views import *
+from eCommerce.views import *
 
 urlpatterns = [
     url('admin/', admin.site.urls),
