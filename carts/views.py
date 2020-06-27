@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from .models import Cart
 
-# Create your views here.
+def cart_create(user=None):
+    cart_obj = Cart.objects.create(user=None)
+    return cart_obj
+
 def cart_home(request):
     cart_id = request.session.get('cart_id', None)
-    if cart_id is None:
-        cart_obj = Cart.objects.create(user=None)
-        request.session['cart_id'] = cart_obj.id
-        print('Created')
+    qs = Cart.objects.filter(id=cart_id)
+    if qs.count() == 1:
+        cart_obj = qs.first()
+        # cart_id exists
     else:
-        cart_obj = Cart.objects.get(id=cart_id)
-        print('cart id exists')
+        cart_obj = cart_create()
+        request.session['cart_id'] = cart_obj.id
+        # create cart
     return render(request, 'carts/home.html')
