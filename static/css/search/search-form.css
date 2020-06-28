@@ -1,4 +1,4 @@
-form{
+.search-form{
     position: relative;
     top: 50%;
     left: 50%;
@@ -13,7 +13,7 @@ form{
     padding: 5px;
 }
 
-input{
+.search-input{
     position: absolute;
     top: 0;
     left: 0;
@@ -44,16 +44,16 @@ input{
     cursor: pointer;
 }
 
-form:hover{
+.search-form:hover{
     width: 200px;
     cursor: pointer;
 }
 
-form:hover input{
+.search-form:hover .search-input{
     display: block;
 }
 
-form:hover .fa{
+.search-form:hover .fa{
     background: #07051a;
     color: white;
 }
