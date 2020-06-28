@@ -12,7 +12,7 @@ def cart_home(request):
         cart_obj = qs.first()
         # cart_id exists
     else:
-        cart_obj = cart_create()
+        cart_obj = Cart.objects.new_cart(user=request.user)
         request.session['cart_id'] = cart_obj.id
         # create cart
     return render(request, 'carts/home.html')
