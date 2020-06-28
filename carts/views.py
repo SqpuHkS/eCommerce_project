@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Cart
 
 def cart_create(user=None):
-    cart_obj = Cart.objects.create(user=None)
+    cart_obj = Cart.objects.new_cart(user)
     return cart_obj
 
 def cart_home(request):
