@@ -10,9 +10,12 @@ def cart_home(request):
     qs = Cart.objects.filter(id=cart_id)
     if qs.count() == 1:
         cart_obj = qs.first()
+        if request.user.is_authenticated and cart_obj.user is None:
+            cart_obj.user = request.user
+            cart_obj.save()
         # cart_id exists
     else:
-        cart_obj = cart_create()
+        cart_obj = Cart.objects.new_cart(user=request.user)
         request.session['cart_id'] = cart_obj.id
         # create cart
     return render(request, 'carts/home.html')
