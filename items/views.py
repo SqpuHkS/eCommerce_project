@@ -1,9 +1,7 @@
-from django.contrib.auth import login, authenticate, get_user_model
 from django.http import Http404
-from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from .forms import *
+from carts.models import Cart
 from .models import *
 
 
@@ -16,6 +14,12 @@ class ItemListView(ListView):
 class ItemDetailSlugView(DetailView):
     model = Item
     template_name = 'items/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemDetailSlugView, self).get_context_data(**kwargs)
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context
 
     def get_queryset(self, **kwargs):
         slug = self.kwargs.get('slug')

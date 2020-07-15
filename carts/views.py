@@ -16,7 +16,7 @@ def cart_home(request):
     return render(request, 'carts/home.html')
 
 def cart_update(request):
-    item_id = 1
+    item_id = 3
     item_obj = Item.objects.get(id = item_id)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     cart_obj.items.add(item_obj)
