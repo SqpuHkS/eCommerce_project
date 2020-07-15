@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from items.models import Item
-from django.db.models.signals import pre_save, post_save, m2m_changed
+from django.db.models.signals import pre_save, m2m_changed
 
 # Create your models here.
 User = settings.AUTH_USER_MODEL
@@ -60,7 +60,10 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
 m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.items.through)
 
 def cart_pre_save_receiver(sender, instance, *args, **kwargs):
-    instance.total = instance.subtotal
+    if instance.total > 0:
+        instance.total = instance.subtotal + 10
+    else:
+        instance.total = 0.00
 
 pre_save.connect(cart_pre_save_receiver, sender=Cart)
 

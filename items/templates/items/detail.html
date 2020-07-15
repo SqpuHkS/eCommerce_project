@@ -10,8 +10,19 @@
 {% endblock %}
 
 {% block content %}
-    <h1 style="text-transform: capitalize">{{ object.title }} <h1/>
-    <img src="{{ object.image.url }}" class="item-img"> <br/>
+    <h1 style="text-transform: capitalize">{{ object.title }} </h1>
+        {% if object.image %}
+            <img src="{{ object.image.url }}" class="item-img"> <br/>
+        {% endif %}
     {{ object.description }} <br/>
     {{ object.price }} <br/>
+
+    <div>
+        {{ cart }}
+        {% if object in cart.items.all %}
+            In cart <button>Remove</button>
+        {% else %}
+            <button>Add to cart</button>
+        {% endif %}
+    </div>
 {% endblock %}

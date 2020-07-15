@@ -19,5 +19,8 @@ def cart_update(request):
     item_id = 3
     item_obj = Item.objects.get(id = item_id)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
-    cart_obj.items.add(item_obj)
+    if item_obj in cart_obj.items.all():
+        cart_obj.items.remove(item_obj)
+    else:
+        cart_obj.items.add(item_obj)
     return redirect('cart:home')
