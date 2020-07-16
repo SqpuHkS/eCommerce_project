@@ -1,0 +1,29 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/items/card.css' %}">
+
+
+<div class="wrapper">
+    <div class="product-img">
+      {% if object.image %}
+        <img src="{{ object.image.url }}" width="327"> <br/>
+    {% endif %}
+    </div>
+    <div class="product-info">
+      <div class="product-text">
+        <h1>{{ object.title }}</h1>
+          <br>
+        <p>{{ object.description }}</p>
+
+      </div>
+      <div class="product-price-btn">
+        <p class="price"><span>{{ object.price }}</span>$</p>
+
+        {% if object in cart.items.all %}
+            <button style="background-color: #ee6666">Remove</button>
+        {% else %}
+            <button>Add to cart</button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
