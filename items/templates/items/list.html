@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Items list
 {% endblock %}
 
-{% block content %}
-    {% for obj in object_list %}
-        {% include 'items/snippets/list-card.html' %}
+{% block base_head %}
+    <link rel="stylesheet" href="{% static 'css/items/list.css' %}">
+{% endblock %}
 
-    {% endfor %}
+{% block content %}
+    <div class="items-list">
+        {% for obj in object_list %}
+
+                {% include 'items/snippets/list-card.html' %}
+
+        {% endfor %}
+    </div>
+
 {% endblock %}
