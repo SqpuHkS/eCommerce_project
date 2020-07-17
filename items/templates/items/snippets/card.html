@@ -19,11 +19,8 @@
       <div class="product-price-btn">
         <p class="price"><span>{{ object.price }}</span>$</p>
 
-        {% if object in cart.items.all %}
-            <button style="background-color: #ee6666">Remove</button>
-        {% else %}
-            <button>Add to cart</button>
-        {% endif %}
+          {% include 'items/snippets/update-card.html' with item=object %}
+
       </div>
     </div>
   </div>
