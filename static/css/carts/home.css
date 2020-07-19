@@ -37,12 +37,12 @@ h2 {
 h2 a {
   font-weight: 700;
   text-transform: uppercase;
-  color: #FB667A;
+  color: #fbe266;
   text-decoration: none;
 }
 
 .blue { color: #185875; }
-.yellow { color: #FFF842; }
+.yellow {   color:#ee6666; }
 
 .container th h1 {
 	  font-weight: bold;
@@ -88,7 +88,7 @@ h2 a {
 	  background-color: #1F2739;
 }
 
-.container td:first-child { color: #FB667A; }
+.container td:first-child { color: #fbe266; }
 
 .container tr:hover {
    background-color: #464A52;
@@ -98,8 +98,12 @@ h2 a {
 }
 
 .container td:hover {
-  background-color: #FFF842;
+    background-color:#ee6666;
   color: #403E10;
+}
+
+.container td:last-child{
+    width: 120px;
 }
 
 @media (max-width: 800px) {
