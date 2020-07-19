@@ -1,8 +1,8 @@
 .items-list{
-    float: left;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+
 

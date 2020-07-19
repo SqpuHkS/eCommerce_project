@@ -6,14 +6,7 @@ from items.models import Item
 
 def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
-    items =  cart_obj.items.all()
-    total = 0
-    for i in items:
-        total += i.price
-    # create cart
-    cart_obj.total = total
-    cart_obj.save()
-    return render(request, 'carts/home.html')
+    return render(request, 'carts/home.html', context={'cart': cart_obj})
 
 def cart_update(request):
     item_id = request.POST.get('item_id')
