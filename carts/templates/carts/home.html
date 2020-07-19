@@ -22,13 +22,21 @@
                 </tr>
             </thead>
             <tbody>
-            {% for item in cart.items.all %}
+                {% for item in cart.items.all %}
+                    <tr>
+                        <td>{{ item.title.capitalize }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{% include 'items/snippets/update-card.html' with object=item cart=cart item=item%}</td>
+                    </tr>
+                {% endfor %}
                 <tr>
-                    <td>{{ item.title.capitalize }}</td>
-                    <td>{{ item.price }}</td>
-                    <td>{% include 'items/snippets/update-card.html' with object=item cart=cart item=item%}</td>
+                    <td style="color:#A7A1AE;">Subtotal:</td>
+                    <td style="font-weight: bold">{{ cart.subtotal }}</td>
                 </tr>
-            {% endfor %}
+                <tr>
+                    <td style="color: #ffffff; font-weight: bold" >Total:</td>
+                    <td style="color: #ffffff; font-weight: bold">{{ cart.total }}</td>
+                </tr>
             </tbody>
         </table>
 
