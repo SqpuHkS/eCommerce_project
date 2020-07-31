@@ -2,6 +2,9 @@
 {% url 'items:list' as list %}
 {% url 'login-page-url' as login %}
 {% url 'register-page-url' as register %}
+{% url 'cart:home' as cart_url %}
+
+{% load static %}
 
 <div class='nav'>
     <ul>
@@ -19,14 +22,23 @@
                        href='{{ register }}'>Register</a>
                 </li>
             {% endif %}
-        <li><a href='#'>Subscription</a>
-            <ul>
-                <li><a href='#'>Free</a></li>
-                <li><a href='#'>Bronze</a></li>
-                <li><a href='#'>Sliver</a></li>
-                <li><a href='#'>Gold</a></li>
-            </ul>
-        </li>
+
+        <li>
+            <a class="{% if request.path ==  cart_url %}act{% endif %}"
+                       href='{{ cart_url }}'>{{ request.session.cart_total }}<img src="{% static 'img/cart/cart_icon.png' %}"
+                                                                                class="cart-img">
+</a></li>
+
+
+{#        <li><a href='#'>Subscription</a>#}
+{#            <ul>#}
+{#                <li><a href='#'>Free</a></li>#}
+{#                <li><a href='#'>Bronze</a></li>#}
+{#                <li><a href='#'>Sliver</a></li>#}
+{#                <li><a href='#'>Gold</a></li>#}
+{#            </ul>#}
+{#        </li>#}
+
 
         <li class='lamp'><span></span></li>
 
