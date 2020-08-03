@@ -106,6 +106,14 @@ h2 a {
     width: 120px;
 }
 
+.checkout-link{
+    color: chartreuse;
+}
+
+.container-text-center{
+    text-align: center;
+}
+
 @media (max-width: 800px) {
 .container td:nth-child(4),
 .container th:nth-child(4) { display: none; }

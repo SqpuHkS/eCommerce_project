@@ -45,4 +45,8 @@
         <p>Cart is empty</p>
     {% endif %}
 
+    <div class="container-text-center">
+        <a href="{% url 'cart:checkout' %}" class="checkout-link">Checkout</a>
+    </div>
+
 {% endblock %}
