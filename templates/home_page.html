@@ -23,11 +23,11 @@
         <h1 class="center home_page_title">HaLo {{ username }}</h1>
     {% else %}
         <h1 class="center">HaLO! You can login here:
-        <a href="{% url 'login-page-url' %}"
+        <a href="{% url 'accounts:login' %}"
             class="href-login-register">Login</a>
         </h1>
         <h1 class="center">Or register here:
-        <a href="{% url 'register-page-url' %}"
+        <a href="{% url 'accounts:register' %}"
             class="href-login-register">Register</a>
         </h1>
     {% endif %}

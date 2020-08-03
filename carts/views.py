@@ -29,7 +29,6 @@ def cart_update(request):
 def checkout_home(request):
     cart_obj, cart_created = Cart.objects.new_or_get(request)
     order_obj = None
-    print(cart_obj.items.count())
     if cart_created or cart_obj.items.count() == 0:
         return redirect('cart:home')
     else:
