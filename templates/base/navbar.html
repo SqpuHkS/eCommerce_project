@@ -2,7 +2,9 @@
 {% url 'items:list' as list %}
 {% url 'accounts:login' as login %}
 {% url 'accounts:register' as register %}
+{% url 'accounts:logout' as logout %}
 {% url 'cart:home' as cart_url %}
+
 
 {% load static %}
 
@@ -13,8 +15,8 @@
         <li><a class="{% if request.path == list %}act{% endif %}"
                href='{{ list }}'>Items</a>
             {% if request.user.is_authenticated %}
-                <li><a class="{% if request.path ==  login %}act{% endif %}"
-                       href='{{ login }}'>Login</a></li>
+                <li><a class="{% if request.path == logout %}act{% endif %}"
+                       href='{{ logout }}'>Logout</a></li>
             {% else %}
                 <li><a class="{% if request.path ==  login %}act{% endif %}"
                        href='{{ login }}'>Login</a></li>

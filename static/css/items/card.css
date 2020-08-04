@@ -14,7 +14,8 @@
   float: left;
   height: 420px;
   width: 327px;
-  position: relative;]
+  position: relative;
+  overflow: hidden;
 }
 
 .product-img img {

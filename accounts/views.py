@@ -7,6 +7,7 @@ from .forms import *
 def login_page(request):
     form = LoginForm(request.POST or None)
     print(request.GET.get('next'))
+    print(dir(request.GET))
     if form.is_valid():
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
