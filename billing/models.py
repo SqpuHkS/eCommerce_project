@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 User = settings.AUTH_USER_MODEL
 
 class BillingProfile(models.Model):
-    user = models.ForeignKey(User, unique=True, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
     email = models.EmailField()
     active = models.BooleanField(default=True)
     update = models.DateTimeField(auto_now=True)
@@ -21,7 +21,7 @@ class BillingProfile(models.Model):
 
 
 def user_created_receiver(sender, instance, created, *args, **kwargs):
-    if created:
-        BillingProfile.objects.get_or_create(user=instance)
+    if created and instance.email:
+        BillingProfile.objects.get_or_create(user=instance, email=instance.email)
 
 post_save.connect(user_created_receiver, sender=User)

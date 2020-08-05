@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
     Checkout
 {% endblock %}
 
 
+
 {% block content %}
-    <p>Cart Total: {{ object.cart.total }}</p>
-    <p>Shipping Total: {{ object.shipping_total }}</p>
-    <p>TOTAL: {{ object.total }}</p>
+
+
+    {% if not billing_profile %}
+
+        <p>Login</p>
+        {% include 'accounts/snippets/login_form.html' with form=login_form next=request.build_absolute_uri %}
+
+    {% else %}
+
+        <p>Cart Total: {{ object.cart.total }}</p>
+        <p>Shipping Total: {{ object.shipping_total }}</p>
+        <p>TOTAL: {{ object.total }}</p>
+
+    {% endif %}
 {% endblock %}

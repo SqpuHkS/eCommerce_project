@@ -11,20 +11,6 @@
 
 {% block content %}
     <div class="register-and-login-block">
-    <form method="post">
-        {% csrf_token %}
-
-        {% for f in form %}
-            {{ f.name.title }}
-            {{ f }} <br>
-        {% endfor %}
-
-
-        <button type="submit"
-                class="btn-default">
-            Submit
-        </button>
-
-    </form>
+    {% include 'accounts/snippets/login_form.html' %}
     </div>
 {% endblock %}

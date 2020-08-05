@@ -1,0 +1,21 @@
+<form method="POST" action="{% url 'accounts:login' %}">
+    {% csrf_token %}
+
+
+    {% if next %}
+        PRIVET
+        <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+
+    {% for f in form %}
+        {{ f.name.title }}
+        {{ f }} <br>
+    {% endfor %}
+
+
+    <button type="submit"
+            class="btn-default">
+        Submit
+    </button>
+
+</form>
