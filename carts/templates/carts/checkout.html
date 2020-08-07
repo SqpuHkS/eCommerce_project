@@ -15,6 +15,11 @@
         <p>Login</p>
         {% include 'accounts/snippets/login_form.html' with form=login_form next=request.build_absolute_uri %}
 
+        OR
+
+        {% url 'accounts:guest' as guest_url %}
+        {% include 'accounts/snippets/login_form.html' with form=guest_form next=request.build_absolute_uri action_url=guest_url %}
+
     {% else %}
 
         <p>Cart Total: {{ object.cart.total }}</p>
