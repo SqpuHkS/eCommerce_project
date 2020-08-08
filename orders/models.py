@@ -30,7 +30,7 @@ class Order(models.Model):
         cart_total = self.cart.total
         shipping_total = self.shipping_total
         order_total = Decimal(cart_total) + Decimal(shipping_total)
-        self.total = order_total
+        self.total = round(order_total, 2)
         self.save()
         return order_total
 
