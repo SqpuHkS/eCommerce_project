@@ -13,7 +13,22 @@ ORDER_STATUS_CHOICES = (
     ('refunded', 'Refunded'),
 )
 
-# Create your models here.
+
+class OrderManager(models.Manager):
+    def new_or_get(self, billing_profile, cart_obj):
+
+        created = False
+        #qs = Order.objects.filter(billing_profile=billing_profile, cart=cart_obj, active=True)
+        #The same as code below
+        qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True)
+        if qs.count() == 1:
+            obj = qs.first()
+        else:
+            obj = Order.objects.create(billing_profile=billing_profile, cart=cart_obj)
+            created = True
+        return obj, created
+
+
 class Order(models.Model):
     billing_profile = models.ForeignKey(BillingProfile, blank=True, null=True, on_delete=models.CASCADE)
     order_id = models.CharField(max_length=120, blank=True)
@@ -34,12 +49,15 @@ class Order(models.Model):
         self.save()
         return order_total
 
-
+    objects = OrderManager()
 
 #generate the order_id
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
         instance.order_id = unique_order_id_generator(instance)
+    qs = Order.objects.filter(cart=instance.cart).exclude(billing_profile=instance.billing_profile)
+    if qs.exists():
+        qs.update(active=False)
 
 pre_save.connect(pre_save_create_order_id, sender=Order)
 
