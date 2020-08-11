@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
+from addresses.forms import AddressForm
 from billing.models import BillingProfile
-from accounts.models import GuestEmail
 from .models import Cart
 from items.models import Item
 from orders.models import Order
@@ -37,6 +37,7 @@ def checkout_home(request):
 
     login_form = LoginForm()
     guest_form = GuestForm()
+    address_form = AddressForm()
 
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
 
@@ -48,6 +49,7 @@ def checkout_home(request):
         'object': order_obj,
         'login_form': login_form,
         'guest_form': guest_form,
+        'address_form': address_form,
     }
 
     return render(request, 'carts/checkout.html', context)

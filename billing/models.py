@@ -6,10 +6,10 @@ from accounts.models import GuestEmail
 
 User = settings.AUTH_USER_MODEL
 
-class BillingProfileManage(models.Manager):
+class BillingProfileManager(models.Manager):
     def new_or_get(self, request):
         guest_email_id = request.session.get('guest_email_id')
-        user = self.user
+        user = request.user
         created = False
         obj = None
         if user.is_authenticated:
@@ -38,7 +38,7 @@ class BillingProfile(models.Model):
     def __str__(self):
         return self.email
 
-    objects = BillingProfileManage()
+    objects = BillingProfileManager()
 
 # def billing_profile_created_receiver(sender, instance, created, *args, **kwargs):
 #     if created:

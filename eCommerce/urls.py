@@ -24,8 +24,9 @@ from eCommerce.views import *
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url('account/', include('accounts.urls'), name='account'),
+    url('account/', include('accounts.urls', namespace='account')),
     url('cart/', include('carts.urls', namespace='cart')),
+    url('checkout/address/', include('addresses.urls', namespace='address')),
     url('items/', include('items.urls', namespace='items')),
     url('search/', include('search.urls', namespace='search')),
     url('^$', main_page, name='main-page-url'),

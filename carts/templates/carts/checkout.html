@@ -8,8 +8,9 @@
 
 
 {% block content %}
+    <hr>
     {{ object.order_id }} -- {{ object.cart }}
-
+    <hr>
 
     {% if not billing_profile %}
 
@@ -23,9 +24,18 @@
 
     {% else %}
 
-        <p>Cart Total: {{ object.cart.total }}</p>
-        <p>Shipping Total: {{ object.shipping_total }}</p>
-        <p>TOTAL: {{ object.total }}</p>
+        {% if not object.shipping_address %}
+            <h3>Shipping address</h3>
+            {% url 'accounts:guest' as guest_url %}
+            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=guest_url %}
 
+
+        {% else %}
+
+            <p>Cart Total: {{ object.cart.total }}</p>
+            <p>Shipping Total: {{ object.shipping_total }}</p>
+            <p>TOTAL: {{ object.total }}</p>
+
+        {% endif %}
     {% endif %}
 {% endblock %}
