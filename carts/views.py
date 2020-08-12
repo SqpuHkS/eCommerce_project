@@ -52,4 +52,6 @@ def checkout_home(request):
         'address_form': address_form,
     }
 
+
+
     return render(request, 'carts/checkout.html', context)

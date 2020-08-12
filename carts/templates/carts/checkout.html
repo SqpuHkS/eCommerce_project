@@ -6,7 +6,6 @@
 {% endblock %}
 
 
-
 {% block content %}
     <hr>
     {{ object.order_id }} -- {{ object.cart }}
@@ -26,10 +25,11 @@
 
         {% if not object.shipping_address %}
             <h3>Shipping address</h3>
-            {% url 'accounts:guest' as guest_url %}
-            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=guest_url %}
+            {% url 'address:create' as address_create_url %}
+            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url %}
 
-
+            {{ request.build_absolute_uri }}
+            {{ guest_url }}
         {% else %}
 
             <p>Cart Total: {{ object.cart.total }}</p>
