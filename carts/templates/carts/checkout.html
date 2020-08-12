@@ -26,16 +26,23 @@
         {% if not object.shipping_address %}
             <h3>Shipping address</h3>
             {% url 'address:create' as address_create_url %}
-            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url %}
+            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url address_type = 'shipping'%}
 
-            {{ request.build_absolute_uri }}
-            {{ guest_url }}
+        {% elif not object.billing_address%}
+
+            <h3>Billing address</h3>
+            {% url 'address:create' as address_create_url %}
+            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url address_type = 'billing'%}
+
+
         {% else %}
+
+            <h3>Finalize checkout</h3>
 
             <p>Cart Total: {{ object.cart.total }}</p>
             <p>Shipping Total: {{ object.shipping_total }}</p>
             <p>TOTAL: {{ object.total }}</p>
-
+            <button>Checkout</button>
         {% endif %}
     {% endif %}
 {% endblock %}
