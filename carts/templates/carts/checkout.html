@@ -11,7 +11,6 @@
     {{ object.order_id }} -- {{ object.cart }}
     <hr>
 
-    {{ object. }}
 
     {% if not billing_profile %}
 
@@ -25,16 +24,19 @@
 
     {% else %}
 
+        {{ object.shipping_address }}
+        {{ object.billing_address }}
         {% if not object.shipping_address %}
             <h3>Shipping address</h3>
             {% url 'address:create' as address_create_url %}
-            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url %}
+            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url address_type='shipping_address'%}
+
 
         {% elif not object.billing_address%}
 
             <h3>Billing address</h3>
             {% url 'address:create' as address_create_url %}
-            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url %}
+            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url address_type='billing_address' %}
 
 
         {% else %}
