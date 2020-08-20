@@ -7,9 +7,6 @@
 
 
 {% block content %}
-    <hr>
-    {{ object.order_id }} -- {{ object.cart }}
-    <hr>
 
 
     {% if not billing_profile %}
@@ -24,8 +21,6 @@
 
     {% else %}
 
-        {{ object.shipping_address }}
-        {{ object.billing_address }}
         {% if not object.shipping_address %}
             <h3>Shipping address</h3>
             {% url 'address:create' as address_create_url %}
@@ -42,7 +37,9 @@
         {% else %}
 
             <h3>Finalize checkout</h3>
-
+            <p>Items: {% for item in object.cart.items.all %}{{ item.title.capitalize    }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p>Shipping Address: {{ object.shipping_address.get_address }}</p>
+            <p>Billing Address: {{ object.billing_address.get_address }}</p>
             <p>Cart Total: {{ object.cart.total }}</p>
             <p>Shipping Total: {{ object.shipping_total }}</p>
             <p>TOTAL: {{ object.total }}</p>

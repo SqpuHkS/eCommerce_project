@@ -67,7 +67,6 @@ def checkout_home(request):
             request.session['cart_total'] = 0
             return redirect('/cart/success')
 
-
     context = {
         'billing_profile': billing_profile,
         'object': order_obj,
@@ -76,6 +75,7 @@ def checkout_home(request):
         'address_form': address_form,
     }
 
-
-
     return render(request, 'carts/checkout.html', context)
+
+def checkout_done(request):
+    return render(request, 'carts/success.html')
