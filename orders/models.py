@@ -21,7 +21,7 @@ class OrderManager(models.Manager):
         created = False
         #qs = Order.objects.filter(billing_profile=billing_profile, cart=cart_obj, active=True)
         #The same as code below
-        qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True)
+        qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True, status='created')
         if qs.count() == 1:
             obj = qs.first()
         else:
@@ -51,6 +51,18 @@ class Order(models.Model):
         self.total = round(order_total, 2)
         self.save()
         return order_total
+
+
+    def check_done(self):
+        if self.billing_profile and self.shipping_address and self.billing_address and self.total > 0:
+            return True
+        return False
+
+    def mark_paid(self):
+        if self.check_done():
+            self.status = 'paid'
+            self.save()
+        return self.status
 
     objects = OrderManager()
 

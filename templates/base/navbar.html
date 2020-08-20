@@ -26,7 +26,7 @@
             {% endif %}
 
         <li>
-            <a class="{% if request.path ==  cart_url %}act{% endif %} cart-div"
+            <a class="{% if request.path == cart_url %}act{% endif %} cart-div"
                href='{{ cart_url }}'>{{ request.session.cart_total }}<img src="{% static 'img/cart/shopping-cart-128.png' %}" class="cart-img"></a>
         </li>
 
