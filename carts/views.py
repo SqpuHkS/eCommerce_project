@@ -30,16 +30,16 @@ def cart_update(request):
 
         if item_obj in cart_obj.items.all():
             cart_obj.items.remove(item_obj)
-            added = True
+            added = False
         else:
             cart_obj.items.add(item_obj)
-            added = False
+            added = True
 
         request.session['cart_total'] = cart_obj.items.count()
-
         if request.is_ajax():
             data = {
                 'added': added,
+                'cart_total': request.session['cart_total'],
             }
             return JsonResponse(data)
 

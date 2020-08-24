@@ -160,3 +160,7 @@ margin:10px;
 .cart-div{
   display: flex;
 }
+
+.items-counter{
+  font: 400 15px 'PT Sans', sans-serif;
+}
