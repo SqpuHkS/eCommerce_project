@@ -1,15 +1,14 @@
-{% load static %}
-
 <form class="form-item-ajax" method="post" action="{% url 'cart:update' %}">
     {% csrf_token %}
     <input type="hidden" name="item_id" value="{{ item.id }}">
 
-    {% if object in cart.items.all %}
-        <button type="submit"
+    <span class="submit-span">
+        {% if object in cart.items.all %}
+            <button type="submit"
                 style="background-color: #ee6666">Remove</button>
-    {% else %}
-        <button type="submit"
+        {% else %}
+            <button type="submit"
                 style="background-color: lightgreen">Add to cart</button>
-    {% endif %}
-
+        {% endif %}
+    </span>
 </form>

@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 from addresses.forms import AddressForm
@@ -12,22 +13,36 @@ from orders.models import Order
 
 def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
+
     return render(request, 'carts/home.html', context={'cart': cart_obj})
 
 def cart_update(request):
     item_id = request.POST.get('item_id')
+
     if item_id is not None:
         try:
             item_obj = Item.objects.get(id = item_id)
         except Item.DoesNotExist:
             print('Error')
             return redirect('cart:home')
+
         cart_obj, new_obj = Cart.objects.new_or_get(request)
+
         if item_obj in cart_obj.items.all():
             cart_obj.items.remove(item_obj)
+            added = True
         else:
             cart_obj.items.add(item_obj)
+            added = False
+
         request.session['cart_total'] = cart_obj.items.count()
+
+        if request.is_ajax():
+            data = {
+                'added': added,
+            }
+            return JsonResponse(data)
+
     return redirect('cart:home')
 
 def checkout_home(request):

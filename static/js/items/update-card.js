@@ -13,7 +13,11 @@ $(document).ready(function (){
             data: data,
             method: method,
             success: function (data){
-                console.log('success\n' + data)
+                var submitSpan = thisForm.find('.submit-span')
+                if(data.added)
+                    submitSpan.html('<button type="submit" style="background-color: #ee6666">Remove</button>')
+                else 
+                    submitSpan.html('<button type="submit"\n style="background-color: lightgreen">Add to cart</button>')
             },
             error: function (errorData){
                 console.log("Error\n" + errorData)
