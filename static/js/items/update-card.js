@@ -30,7 +30,28 @@ $(document).ready(function () {
             error: function (errorData) {
                 console.log("Error\n" + errorData)
             }
+
+
+
+
         })
+
+
+        //refresh the cart after remove an item
+        currentPath = window.location.href
+
+        if (currentPath.indexOf('cart') !== -1) {
+            refreshCart()
+        }
+
+
+        function refreshCart() {
+            var cartItems = $('.cart-body')
+            console.log(cartItems)
+        }
+
+
+
     })
 
 })

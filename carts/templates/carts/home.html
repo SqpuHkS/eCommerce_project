@@ -13,7 +13,7 @@
     <h1>Items in cart</h1>
 
     {% if cart.items.exists %}
-        <table class="container">
+        <table class="container cart-table">
             <thead>
                 <tr>
                     <th><h1>Item</h1></th>
@@ -21,7 +21,7 @@
                     <th><h1>Remove</h1></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="cart-body">
                 {% for item in cart.items.all %}
                     <tr>
                         <td><a href="{{ item.get_absolute_url }}"
