@@ -1,4 +1,5 @@
 $(function () {
+
     if ($('.nav>ul>li').hasClass('selected')) {
         $('.selected').addClass('active');
         var currentleft = $('.selected').position().left + "px";

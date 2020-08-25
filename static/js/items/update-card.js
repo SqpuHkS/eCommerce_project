@@ -21,8 +21,11 @@ $(document).ready(function () {
                     console.log(data.added + 'add to')
                     submitSpan.html('<button type="submit"\n style="background-color: lightgreen">Add to cart</button>')
                 }
+
+                // count and edit the number of items in cart
                 var countItems = $('.items-counter')
                 countItems.text(data.cart_total)
+                
             },
             error: function (errorData) {
                 console.log("Error\n" + errorData)
