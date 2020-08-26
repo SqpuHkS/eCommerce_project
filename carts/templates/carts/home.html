@@ -25,11 +25,11 @@
             <div class="item-rows">
                 {% for item in cart.items.all %}
 
-                    <tr>
+                    <tr class="item-row">
                         <td><a href="{{ item.get_absolute_url }}"
                                style="color: #fbe266">{{ item.title.capitalize }}</a></td>
                         <td>{{ item.price }}</td>
-                        <td>{% include 'items/snippets/update-card.html' with object=item cart=cart item=item %}</td>
+                        <td class="button-remove-add">{% include 'items/snippets/update-card.html' with object=item cart=cart item=item %}</td>
                     </tr>
 
                 {% endfor %}

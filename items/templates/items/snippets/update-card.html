@@ -4,11 +4,17 @@
 
     <span class="submit-span">
         {% if object in cart.items.all %}
+            <div>
             <button type="submit"
-                style="background-color: #ee6666">Remove</button>
+                    id="{{ item.id }}"
+                    style="background-color: #ee6666">Remove</button>
+            </div>
         {% else %}
+            <div>
             <button type="submit"
-                style="background-color: lightgreen">Add to cart</button>
+                    id="{{ item.id }}"
+                    style="background-color: lightgreen">Add to cart</button>
+            </div>
         {% endif %}
     </span>
 </form>

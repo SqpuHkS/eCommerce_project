@@ -13,7 +13,7 @@ from orders.models import Order
 
 def cart_detail_api_view(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
-    items = [{'title': x.title, 'price': x.price} for x in cart_obj.items.all()]
+    items = [{'title': x.title, 'price': x.price, 'id': x.id} for x in cart_obj.items.all()]
     return JsonResponse({'items': items, 'total': cart_obj.total, 'subtotal': cart_obj.subtotal})
 
 def cart_home(request):
@@ -36,15 +36,18 @@ def cart_update(request):
         if item_obj in cart_obj.items.all():
             cart_obj.items.remove(item_obj)
             added = False
+            id = item_obj.id
         else:
             cart_obj.items.add(item_obj)
             added = True
+            id = item_obj.id
 
         request.session['cart_total'] = cart_obj.items.count()
         if request.is_ajax():
             data = {
                 'added': added,
                 'cart_total': request.session['cart_total'],
+                'id': id,
             }
             return JsonResponse(data)
 
