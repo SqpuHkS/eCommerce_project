@@ -43,6 +43,14 @@
                     <td style="color: #ffffff; font-weight: bold">Total:</td>
                     <td style="color: #ffffff; font-weight: bold"><span class="total">{{ cart.total }}</span></td>
                 </tr>
+                <tr>
+                    <td class="hide-td"></td>
+                    <td>
+                        <form action="{% url 'cart:checkout' %}">
+                            <input type="submit" value="Checkout">
+                        </form>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -51,8 +59,6 @@
         <p>Cart is empty</p>
     {% endif %}
 
-    <div class="container-text-center">
-        <a href="{% url 'cart:checkout' %}" class="checkout-link">Checkout</a>
-    </div>
+
 
 {% endblock %}
