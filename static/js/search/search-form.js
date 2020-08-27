@@ -3,10 +3,10 @@ $(document).ready(function (){
     searchInput = searchForm.find("[name='q']")
     var typingTimer;
     var typingInterval = 1500;
+    var searchBtn = searchForm.find("[type='submit']")
 
     searchForm.keyup(function (event){
 
-        //key released
         clearTimeout(typingTimer)
         typingTimer = setTimeout(autoSearch, typingInterval)
     })
@@ -17,7 +17,16 @@ $(document).ready(function (){
         clearTimeout(typingTimer)
     })
 
+    function displaySearching(){
+        searchBtn.addClass('disabled')
+        searchBtn.html('<i class="fa fa-spinner fa-spin"></i>')
+    }
+
     function autoSearch(){
-        window.location.href = '/search/?q=' + searchInput.val()
+        displaySearching()
+
+        setTimeout(function (){
+            window.location.href = '/search/?q=' + searchInput.val()
+        }, 1000)
     }
 })

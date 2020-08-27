@@ -31,8 +31,8 @@
 .fa{
     box-sizing: border-box;
     padding: 10px;
-    width: 43.5px;
-    height: 43.5px;
+    width: 42px;
+    height: 42px;
     position: absolute;
     top: 0;
     right: 0;
@@ -54,7 +54,7 @@
 }
 
 .search-form:hover .fa{
-    background: #07051a;
+    background: #0E1119;
     color: white;
 }
 
