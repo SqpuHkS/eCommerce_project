@@ -1,3 +1,5 @@
+import refreshCart from '/static/js/carts/home.js'
+
 $(document).ready(function () {
     var itemForm = $('.form-item-ajax')
 
@@ -36,48 +38,6 @@ $(document).ready(function () {
             error: function (errorData) {
                 console.log("Error\n" + errorData)
             }
-
-
         })
-
-
-        //refresh the cart after remove an item
-        function refreshCart(id) {
-            var cartItems = $('.cart-body')
-
-            var refreshCartUrl = 'api/cart/'
-            var refreshCartMethod = 'GET'
-            var data = {}
-            $.ajax({
-                url: refreshCartUrl,
-                method: refreshCartMethod,
-                data: data,
-                success: function (data) {
-
-                    if (data.items.length > 0) {
-                        $('.item-row').each(function (){
-
-                             if(id == $(this).find('button').attr('id') ){
-
-                                $(this).text('')
-                            }
-
-                        })
-
-                        cartItems.find('.total').text(data.total)
-                        cartItems.find('.subtotal').text(data.subtotal)
-                    }
-                    else{
-                        $('.cart-table').text('Cart is empty')
-                    }
-                },
-                error: function (errorData) {
-                    console.log('error')
-                }
-            })
-        }
-
-
     })
-
 })
