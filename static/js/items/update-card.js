@@ -36,7 +36,11 @@ $(document).ready(function () {
 
             },
             error: function (errorData) {
-                console.log("Error\n" + errorData)
+                $.alert({
+                    title: 'Oops!',
+                    content: 'Something went wrong...',
+                    theme: 'supervan',
+                })
             }
         })
     })

@@ -28,7 +28,11 @@ export default function refreshCart(id) {
             }
         },
         error: function (errorData) {
-            console.log('error')
+            $.alert({
+                    title: 'Oops!',
+                    content: 'Something went wrong...',
+                    theme: 'supervan',
+                })
         }
     })
 }
