@@ -22,8 +22,11 @@
     {% endif %}
     
     <hr>
+    <div class="items-list">
+        {% for obj in object_list %}
 
-    {% for obj in object_list %}
-        {% include 'items/snippets/card.html' with object=obj%}
-    {% endfor %}
+            {% include 'items/snippets/list-card.html' %}
+
+        {% endfor %}
+    </div>
 {% endblock %}
