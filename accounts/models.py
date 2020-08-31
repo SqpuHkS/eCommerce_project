@@ -2,6 +2,42 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
 
+class UserManager(models.Manager):
+    def create_user(self, email, password=None, is_active = True, is_staff = False, is_admin = False):
+        if not email:
+            raise ValueError('Email must be set up')
+        if not password:
+            raise ValueError('Password must be set up')
+
+        user_obj = self.model(
+            email = self.normalize_email(email)
+        )
+        user_obj.set_password(password)
+        user_obj.staff = is_staff
+        user_obj.active = is_active
+        user_obj.admin = is_admin
+        user_obj.save(using=self._db)
+        return user_obj
+
+    def create_staff_user(self, email, password=None):
+        user = self.create_user(
+            email,
+            password=password,
+            is_staff=True,
+        )
+        return user
+
+
+    def create_admin_user(self, email, password=None):
+        user = self.create_user(
+            email,
+            password=password,
+            is_staff=True,
+            is_admin=True,
+        )
+        return user
+
+
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True, default='email')
     active = models.BooleanField(default=True)
