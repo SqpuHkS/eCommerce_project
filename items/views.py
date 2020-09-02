@@ -2,7 +2,7 @@ from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from analytics.signals import analytic_signal
+from analytics.mixins import AnalyticMixin
 from carts.models import Cart
 
 from .models import *
@@ -14,7 +14,7 @@ class ItemListView(ListView):
     template_name = 'items/list.html'
 
 
-class ItemDetailSlugView(DetailView):
+class ItemDetailSlugView(AnalyticMixin, DetailView):
     model = Item
     template_name = 'items/detail.html'
 
