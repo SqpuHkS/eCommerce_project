@@ -19,7 +19,7 @@ class UserManager(models.Manager):
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staff_user(self, email, password=None):
+    def create_staffuser(self, email, password=None):
         user = self.create_user(
             email,
             password=password,
@@ -28,7 +28,7 @@ class UserManager(models.Manager):
         return user
 
 
-    def create_admin_user(self, email, password=None):
+    def create_superuser(self, email, password=None):
         user = self.create_user(
             email,
             password=password,

@@ -4,9 +4,14 @@
 
 
 <div class="wrapper">
+
     <div class="product-img">
+    <a href="{% url 'items:list' %}"
+        class="back">Back</a>
       {% if object.image %}
         <img src="{{ object.image.url }}" width="318" > <br/>
+          {% else %}
+          <p>Sorry. There is a problem with image...</p>
     {% endif %}
     </div>
     <div class="product-info">
@@ -17,7 +22,7 @@
 
       </div>
       <div class="product-price-btn">
-        <p class="price"><span>{{ object.price }}</span>$</p>
+        <p class="price">$<span>{{ object.price }}</span></p>
 
           {% include 'items/snippets/update-card.html' with item=object %}
 

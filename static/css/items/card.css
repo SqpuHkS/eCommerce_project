@@ -120,3 +120,8 @@ span {
 .product-price-btn button:hover {
   background-color: #79b0a1;
 }
+
+.back{
+  top: 0;
+  right: 100%;
+}
