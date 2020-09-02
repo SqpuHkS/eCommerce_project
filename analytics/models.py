@@ -3,6 +3,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.conf import settings
 
+from .signals import analytic_signal
+from .utils import get_client_ip
+
 User = settings.AUTH_USER_MODEL
 
 class Analytics(models.Model):
@@ -20,3 +23,16 @@ class Analytics(models.Model):
         ordering = ['-timestamp']
         verbose_name = 'Object viewed'
         verbose_name_plural = 'Objects viewed'
+
+def analytic_receiver(sender, instance, request, *args, **kwargs):
+    c_type = ContentType.objects.get_for_model(sender) #instance.__class__
+
+    new_analytic_obj = Analytics.objects.create(
+        user=request.user,
+        ip_address=get_client_ip(request),
+        content_type=c_type,
+        object_id=instance.id,
+    )
+
+
+analytic_signal.connect(analytic_receiver)
