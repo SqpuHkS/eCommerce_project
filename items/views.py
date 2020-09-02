@@ -1,7 +1,10 @@
 from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+
+from analytics.signals import analytic_signal
 from carts.models import Cart
+
 from .models import *
 
 
@@ -23,11 +26,13 @@ class ItemDetailSlugView(DetailView):
 
     def get_queryset(self, **kwargs):
         slug = self.kwargs.get('slug')
+
         try:
             instance = Item.objects.filter(slug=slug)
         except Item.DoesNotExist:
             raise Http404("Not found...")
         except Item.MultipleObjectsReturned:
             instance = Item.objects.filter(slug=slug).first()
+
         return instance
 
