@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block base_head %}
-    <script src="https://js.stripe.com/v3/"></script>
     <link rel="stylesheet" href="{% static 'css/billing/payment-method.css' %}">
 {% endblock %}
 
@@ -27,5 +26,6 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="{% static 'js/billing/payment-method.js' %}"></script>
 {% endblock %}

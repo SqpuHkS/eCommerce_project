@@ -5,4 +5,4 @@ STRIPE_PUB_KEY = 'pk_test_51HNHrgBlsosESXXHVC5Yy5mNFd04M0DK9PMfZROJPgLTkF1oF2Na9
 def payment_method_view(request):
     if request.method == 'POST':
         print(request.POST)
-    return render(request, 'billing/payment-method.html', context={})
+    return render(request, 'billing/payment-method.html', context={'publish_key': STRIPE_PUB_KEY})
