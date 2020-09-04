@@ -1,8 +1,10 @@
 // Create a Stripe client.
+var dataToken = $('.payment-form').attr('data-token')
+
 var stripe = Stripe('pk_test_51HNHrgBlsosESXXHVC5Yy5mNFd04M0DK9PMfZROJPgLTkF1oF2Na9vDfXsDoEOAXXD9xUQuDeZAs3HfoE2ZQkCDI007J2P3vXi');
 
 // Create an instance of Elements.
-var elements = stripe.elements();
+var elements = stripe.elements(dataToken);
 
 // Custom styling can be passed to options when creating an Element.
 // (Note that this demo uses a wider set of styles than the guide below.)
@@ -65,7 +67,6 @@ function stripeTokenHandler(token) {
   hiddenInput.setAttribute('name', 'stripeToken');
   hiddenInput.setAttribute('value', token.id);
   form.appendChild(hiddenInput);
-
   // Submit the form
   form.submit();
 }
