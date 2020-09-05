@@ -62,8 +62,8 @@ class CardManager(models.Manager):
                 stripe_id=stripe_card_response.id,
                 brand=stripe_card_response.brand,
                 country=stripe_card_response.country,
-                exp_month=stripe_card_response.month,
-                exp_year=stripe_card_response.year,
+                exp_month=stripe_card_response.exp_month,
+                exp_year=stripe_card_response.exp_year,
                 last4=stripe_card_response.last4,
             )
             new_card.save()
