@@ -18,6 +18,6 @@ def payment_method_view(request):
 
 def payment_method_create_view(request):
     if request.method == 'POST' and request.is_ajax():
-        print(request.POST)
+        token = request.POST.get('token')
         return JsonResponse({'message': 'Success! Your card was added.'})
     return HttpResponse('error', status=401)
