@@ -59,6 +59,14 @@ form.addEventListener('submit', function (event) {
     });
 });
 
+function redirectToNext(nextPath, timeoffset){
+    if(nextPath){
+        setTimeout(function (){
+            window.location.href = nextPath
+        }, timeoffset)
+    }
+}
+
 // Submit the form with the token ID.
 function stripeTokenHandler(nextUrl, token) {
 
@@ -75,13 +83,19 @@ function stripeTokenHandler(nextUrl, token) {
         url: paymentMethodEndPoint,
         method: 'POST',
         success: function (data) {
-            console.log(data)
+            var succesMsg = data.message
+            card.clear()
+
             if(nextUrl){
-                window.location.href = nextUrl
+                succesMsg = succesMsg + '<br/><i class="fa fa-spin fa-spinner"></i> Redirecting...'
             }
-            else{
-                window.location.reload()
+            if($.alert){
+                $.alert(succesMsg)
             }
+            else {
+                alert(succesMsg)
+            }
+            redirectToNext(nextUrl, 1500)
         },
         error: function (error) {
 
