@@ -18,12 +18,17 @@ $(document).ready(function (){
 
     const csrftoken = getCookie('csrftoken');
 
-    const request = new Request({headers: {'X-CSRFToken': csrftoken}});
-    fetch(request, {
-        method: 'POST',
-        mode: 'same-origin'  // Do not send CSRF token to another domain.
-    }).then(function (response) {
-        // ...
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
     });
 
 })

@@ -15,9 +15,9 @@ urlpatterns = [
     url('cart/', include('carts.urls', namespace='cart')),
     url('items/', include('items.urls', namespace='items')),
     url('search/', include('search.urls', namespace='search')),
-    url('api/cart/', cart_detail_api_view, name='cart-api'),
-    url('billing/payment-method', payment_method_view, name='payment-method'),
+    url('billing/', include('billing.urls', namespace='billing')),
     url('checkout/address/', include('addresses.urls', namespace='address')),
+    url('api/cart/', cart_detail_api_view, name='cart-api'),
     url('^$', main_page, name='main-page-url'),
 ]
 
