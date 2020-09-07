@@ -1,9 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
-
-{% block base_head %}
-    <link rel="stylesheet" href="{% static 'css/billing/payment-method.css' %}">
-{% endblock %}
 
 {% block content %}
     <div class="form-div">
@@ -15,9 +10,4 @@
         >
         </div>
     </div>
-{% endblock %}
-
-{% block scripts %}
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="{% static 'js/billing/payment-method.js' %}"></script>
 {% endblock %}

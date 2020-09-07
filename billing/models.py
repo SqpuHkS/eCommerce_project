@@ -3,10 +3,10 @@ from django.conf import settings
 from django.db.models.signals import post_save, pre_save
 
 from accounts.models import GuestEmail
-from conf import token
+from conf import STRIPE_SECRET_KEY
 
 import stripe
-stripe.api_key = token
+stripe.api_key = STRIPE_SECRET_KEY
 
 User = settings.AUTH_USER_MODEL
 
@@ -47,6 +47,22 @@ class BillingProfile(models.Model):
 
     def charge(self, order_obj, card=None):
         return Charge.objects.do(self, order_obj, card)
+
+    def get_cards(self):
+        return self.card_set.all()
+
+    @property
+    def has_card(self):
+        return self.get_cards().exists() #True or False
+
+    @property
+    def default_card(self):
+        if __name__ == '__main__':
+            default_cards = self.get_cards().filter(default=True)
+            if default_cards.exists():
+                return default_cards.first()
+            return None
+
 
 def billing_profile_created_receiver(sender, instance, *args, **kwargs):
     if not instance.customer_id:

@@ -24,10 +24,10 @@
         {% if not object.shipping_address %}
             <h3>Shipping address</h3>
             {% url 'address:create' as address_create_url %}
-            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url address_type='shipping_address'%}
+            {% include 'addresses/snippets/address_form.html' with form=address_form next=request.build_absolute_uri action_url=address_create_url address_type='shipping_address' %}
 
 
-        {% elif not object.billing_address%}
+        {% elif not object.billing_address %}
 
             <h3>Billing address</h3>
             {% url 'address:create' as address_create_url %}
@@ -35,19 +35,32 @@
 
 
         {% else %}
+            {% if not has_card %}
+                <div class="form-div">
+                    <div class="stripe-payment-form"
+                         data-token="{{ publish_key }}"
+                         data-next-url="{{ request.build_absolute_uri }}"
+                         data-btn-title="Add Payment Method"
+                    >
+                    </div>
+                </div>
 
-            <h3>Finalize checkout</h3>
-            <p>Items: {% for item in object.cart.items.all %}{{ item.title.capitalize    }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-            <p>Shipping Address: {{ object.shipping_address.get_address }}</p>
-            <p>Billing Address: {{ object.billing_address.get_address }}</p>
-            <p>Cart Total: {{ object.cart.total }}</p>
-            <p>Shipping Total: {{ object.shipping_total }}</p>
-            <p>TOTAL: {{ object.total }}</p>
+            {% else %}
 
-            <form method="POST" action="">
-                {% csrf_token %}
-                <button type="submit">Checkout</button>
-            </form>
+                <h3>Finalize checkout</h3>
+                <p>Items: {% for item in object.cart.items.all %}{{ item.title.capitalize }}{% if not forloop.last %},
+                {% endif %}{% endfor %}</p>
+                <p>Shipping Address: {{ object.shipping_address.get_address }}</p>
+                <p>Billing Address: {{ object.billing_address.get_address }}</p>
+                <p>Cart Total: {{ object.cart.total }}</p>
+                <p>Shipping Total: {{ object.shipping_total }}</p>
+                <p>TOTAL: {{ object.total }}</p>
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <button type="submit">Checkout</button>
+                </form>
+            {% endif %}
         {% endif %}
     {% endif %}
 {% endblock %}

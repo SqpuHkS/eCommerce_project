@@ -10,6 +10,8 @@ from .models import Cart
 from items.models import Item
 from orders.models import Order
 
+from conf import STRIPE_PUB_KEY
+
 
 def cart_detail_api_view(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
@@ -54,6 +56,7 @@ def cart_update(request):
     return redirect('cart:home')
 
 def checkout_home(request):
+
     cart_obj, cart_created = Cart.objects.new_or_get(request)
     order_obj = None
 
@@ -69,6 +72,7 @@ def checkout_home(request):
 
 
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
+    has_card = False
 
     if billing_profile is not None:
         order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
@@ -80,7 +84,7 @@ def checkout_home(request):
             del request.session['billing_address_id']
         if billing_address_id or shipping_address_id:
             order_obj.save()
-
+        has_card = billing_profile.has_card
 
     #Check that order is done
     if request.method == 'POST':
@@ -100,6 +104,8 @@ def checkout_home(request):
         'login_form': login_form,
         'guest_form': guest_form,
         'address_form': address_form,
+        'has_card': has_card,
+        'publish_key': STRIPE_PUB_KEY,
     }
 
     return render(request, 'carts/checkout.html', context)

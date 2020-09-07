@@ -65,6 +65,7 @@ LOGOUT_REDIRECT_URL = '/account/login/'
 
 ROOT_URLCONF = 'eCommerce.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
