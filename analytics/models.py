@@ -26,9 +26,9 @@ class Analytics(models.Model):
 
 def analytic_receiver(sender, instance, request, *args, **kwargs):
     c_type = ContentType.objects.get_for_model(sender) #instance.__class__
-
+    user = request.user if request.user.is_authenticated else None
     new_analytic_obj = Analytics.objects.create(
-        user=request.user,
+        user=user,
         ip_address=get_client_ip(request),
         content_type=c_type,
         object_id=instance.id,
