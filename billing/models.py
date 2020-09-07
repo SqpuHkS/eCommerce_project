@@ -87,6 +87,27 @@ class Card(models.Model):
         return f"{self.brand} {self.last4}"
 
 
+
+class Charge(models.Model):
+    billing_profile = models.ForeignKey(BillingProfile, on_delete=models.CASCADE)
+    stripe_id = models.CharField(max_length=120)
+    paid = models.BooleanField(default=False)
+    refunded = models.BooleanField(default=False)
+    outcome = models.TextField(null=True, blank=True)
+    outcome_type = models.CharField(max_length=120, null=True, blank=True)
+    seller_message = models.CharField(max_length=120, null=True, blank=True)
+    risk_level = models.CharField(max_length=120, null=True, blank=True)
+
+
+
+
+
+
+
+
+
+
+
 pre_save.connect(billing_profile_created_receiver, sender=BillingProfile)
 
 
