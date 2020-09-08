@@ -74,6 +74,9 @@ def billing_profile_created_receiver(sender, instance, *args, **kwargs):
 
 
 class CardManager(models.Manager):
+    def all(self, *args, **kwargs):
+        return self.get_queryset().filter(active=True)
+
     def add_new(self, billing_profile, token):
         if token:
             stripe_card_response = stripe.Customer.create_source(
