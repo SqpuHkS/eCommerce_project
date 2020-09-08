@@ -94,6 +94,8 @@ def checkout_home(request):
                 order_obj.mark_paid()
                 del request.session['cart_id']
                 request.session['cart_total'] = 0
+                if billing_profile.user is None:
+                    billing_profile.set_cards_inactive() #do the all cards inactive
                 return redirect('cart:success')
             else:
                 print(crg_msg)

@@ -2,8 +2,10 @@ import stripe
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
+
 from .models import BillingProfile, Card
 
+from conf import STRIPE_PUB_KEY
 
 def payment_method_view(request):
     # if request.user.is_authenticated:
