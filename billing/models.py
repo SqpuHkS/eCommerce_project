@@ -103,6 +103,8 @@ class Card(models.Model):
     exp_year = models.IntegerField(null=True, blank=True)
     last4 = models.CharField(max_length=4, null=True, blank=True)
     default = models.BooleanField(default=True)
+    active = models.BooleanField(default=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     objects = CardManager()
 
