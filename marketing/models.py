@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+
 from django.conf import settings
 
 
@@ -11,3 +13,19 @@ class MarketingPreference(models.Model):
 
     def __str__(self):
         return self.user.email
+
+
+def marketing_pref_update_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        pass
+        print('Add user to mailchimp')
+
+post_save.connect(marketing_pref_update_receiver, sender=MarketingPreference)
+
+
+def make_marketing_pref_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        MarketingPreference.objects.get_or_create(user=instance)
+
+
+post_save.connect(make_marketing_pref_receiver, sender=settings.AUTH_USER_MODEL)
