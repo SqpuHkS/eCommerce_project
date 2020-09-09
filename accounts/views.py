@@ -45,6 +45,7 @@ def login_page(request):
 
 
 def register_page(request):
+
     User = get_user_model()
     form = RegisterForm(request.POST or None)
     if form.is_valid():
@@ -53,4 +54,8 @@ def register_page(request):
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         User.objects.create_user(username=username, email=email, password=password)
+
+    if request.method == 'POST':
+        return redirect('accounts:login')
+
     return render(request, 'accounts/register.html', context={'form':form})

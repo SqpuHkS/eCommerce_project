@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save, pre_save
+from django.urls import reverse
 
 from accounts.models import GuestEmail
 from conf import STRIPE_SECRET_KEY
@@ -57,16 +58,18 @@ class BillingProfile(models.Model):
 
     @property
     def default_card(self):
-        if __name__ == '__main__':
-            default_cards = self.get_cards().filter(default=True)
-            if default_cards.exists():
-                return default_cards.first()
-            return None
+        default_cards = self.get_cards().filter(active=True, default=True)
+        if default_cards.exists():
+            return default_cards.first()
+        return None
 
     def set_cards_inactive(self):
         cards_qs = self.get_cards()
         cards_qs.update(active=False)
         return cards_qs.filter(active=True).count()
+
+    def get_payment_method_url(self):
+        return reverse('billing:payment-method')
 
 
 

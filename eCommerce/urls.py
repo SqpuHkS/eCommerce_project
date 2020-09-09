@@ -11,7 +11,7 @@ from billing.views import *
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url('account/', include('accounts.urls', namespace='account')),
+    url('account/', include('accounts.urls', namespace='accounts')),
     url('cart/', include('carts.urls', namespace='cart')),
     url('items/', include('items.urls', namespace='items')),
     url('search/', include('search.urls', namespace='search')),
